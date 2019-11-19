@@ -24,10 +24,10 @@ public class PersonRepo implements RepoInterface<Person> {
     }
 
     @Override
-    public Person fetchById(String id) {
+    public Person fetchById(String room_id) {
         String sql = "SELECT * FROM persons WHERE room_id = ?";
         RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
-        return template.queryForObject(sql, rowMapper, id);
+        return template.queryForObject(sql, rowMapper, room_id);
     }
 
     @Override
