@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="MyCSS.css">
@@ -7,6 +7,14 @@
 </head>
 <body>
 <h1></h1>
+
+<select name = "tilbehor_navn" style="float: right; width: 148px">
+    <option value="0">-- Vælg Tilbehør --</option>
+    <!-- Thymeleaf loop der går tilbehørsNavne listen igennem og viser objekternes navne. -->
+    <p th:each="t : ${tilbehorNavne}" th:remove="tag">
+        <option th:text="${t.tilbehor_navn}"/>
+    </p>
+</select>
 
 </body>
 </html>
