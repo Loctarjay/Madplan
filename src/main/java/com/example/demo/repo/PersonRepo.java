@@ -1,7 +1,6 @@
 package com.example.demo.repo;
 
 import com.example.demo.model.Person;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,6 +54,7 @@ public class PersonRepo implements RepoInterface<Person> {
         for(int i = 0; i < personList.size(); i++){
             if(personList.get(i).getRoom_id().equalsIgnoreCase(p.getRoom_id()) && personList.get(i).getPassword().equals(p.getPassword())){
                 loginTest = true;
+                i = personList.size() + 1;
             }else{
                 loginTest = false;
             }
