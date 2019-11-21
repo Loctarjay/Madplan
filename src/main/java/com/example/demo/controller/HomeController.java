@@ -24,6 +24,17 @@ public class HomeController {
         return "login/loginpage";
     }
 
+    @GetMapping("/sign_up_page")
+    public String sign_up_page(){
+        return "login/sign_up_page";
+    }
+
+    @PostMapping("/sign_up_page")
+    public String sign_up_page(@ModelAttribute Person person){
+        pRepo.create(person);
+        return "redirect:/";
+    }
+
     @PostMapping("/loginpage")
     public String loginpage(@ModelAttribute Person person){
         if(pRepo.loginTest(person)){
