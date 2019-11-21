@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="MyCSS.css">
+    <title>Madklub</title>
+</head>
+<body>
+
+    <h1>SEE ALLERGIES</h1>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Room Number</th>
+            <th>Allergies</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <!-- Thymeleaf loop der opretter personobjekter fra dataen i databasen og viser dem i en tabel. -->
+        <tr th:each="persons: ${personer}">
+            <td th:text="${persons.room_id}"/>
+            <td th:text="${persons.allergies}"/>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</body>
+</html>
