@@ -54,7 +54,11 @@ public class HomeController {
         }
     }
 
-
+    @GetMapping("/testPage")
+    public String test_page(){
+        pRepo.date();
+        return "userVersion/testPage";
+    }
 
 
 
