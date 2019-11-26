@@ -6,15 +6,117 @@
     <title>Dinner Club</title>
 </head>
 <body>
-<h1></h1>
+<h1>Choose a day to cook dinner</h1>
 
-<select name = "tilbehor_navn" style="float: right; width: 148px">
-    <option value="0">-- Vælg Tilbehør --</option>
-    <!-- Thymeleaf loop der går tilbehørsNavne listen igennem og viser objekternes navne. -->
-    <p th:each="t : ${tilbehorNavne}" th:remove="tag">
-        <option th:text="${t.tilbehor_navn}"/>
-    </p>
-</select>
+<form action="@{'/week_number/'+${week_number}}" method="POST">
+    <select name="week_number" class="select" onchange="this.form.submit()">
+        <option value="0">-- Choose Week --</option>
+        <p th:each="w : ${week_number}">
+            <option th:text="${w.week_number}"/>
+        </p>
+    </select>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="week : ${week_info}">
+        <td>
+            <a th:text="week.monday"/> <!--     Inde i a-tagget skal listens navn stå          -->
+
+            <br>
+
+            <b href=""> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                <button class="btn">View day</button>
+            </b>
+
+        </td>
+        <td>
+            <a th:text="week.tuesday"/> <!--     Inde i a-tagget skal listens navn stå          -->
+
+            <br>
+
+
+            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                <button class="btn">View day</button>
+
+            </b>
+
+        </td>
+        <td>
+            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+
+            <br>
+
+
+            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                <button class="btn">View day</button>
+
+            </b>
+
+        </td>
+        <td>
+            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+
+            <br>
+
+
+            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                <button class="btn">View day</button>
+
+            </b>
+
+        </td>
+        <td>
+            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+
+            <br>
+
+
+            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                <button class="btn">View day</button>
+
+            </b>
+
+        </td>
+        <td>
+            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+
+            <br>
+
+
+            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                <button class="btn">View day</button>
+
+            </b>
+
+        </td>
+        <td>
+            <a> test 7 </a> <!--     Inde i a-tagget skal listens navn stå          -->
+
+            <br>
+
+
+            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                <button class="btn">View day</button>
+
+            </b>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 
 </body>
 </html>
