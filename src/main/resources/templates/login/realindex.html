@@ -6,11 +6,17 @@
     <title>Dinner Club</title>
 </head>
 <body>
-<img src="logo.png" alt="" height="200" width="200" align="left">
-<div class="center">
-
     <h1>Welcome to the Dinner Club's booking site!</h1>
-    <h2></h2>
+    <h2 th:text="@{'Week Number: '+${chosen.week_number}}"/>
+
+    <form th:action="@{'/'+${week_number}}" method="post">
+        <select name="week_number" class="select" onchange="this.form.submit()">
+            <option value="0">-- Choose Week --</option>
+            <p th:each="w : ${wNumber}">
+                <option th:text="${w.week_number}"/>
+            </p>
+        </select>
+    </form>
     <table>
         <thead>
         <tr>
@@ -25,15 +31,13 @@
         </thead>
         <tbody>
         <tr>
-            <td>
-                <a> test 1 </a> <!--     Inde i a-tagget skal listens navn stå          -->
+            <td >
+                <a th:text="${chosen.monday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
-                <b href=""> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
-                    <a href="/viewAllergies">
-                        <button class="btn"></button>
-                    </a>
+                <b href="/viewAllergies"> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
+                    <button class="btn"></button>
                 </b>
 
             </td>
@@ -125,7 +129,6 @@
         <button align="right" class="button">Login</button>
     </a>
 
-</div>
 
 </body>
 </html>

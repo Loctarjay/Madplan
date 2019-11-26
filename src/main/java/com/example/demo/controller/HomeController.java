@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.ComboObject;
 import com.example.demo.model.Person;
 import com.example.demo.model.Weekplans;
+import com.example.demo.repo.ComboRepo;
 import com.example.demo.repo.PersonRepo;
 import com.example.demo.repo.WeekplansRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +23,39 @@ public class HomeController {
     PersonRepo pRepo;
     @Autowired
     WeekplansRepo wRepo;
+    @Autowired
+    ComboRepo cRepo;
 
     @GetMapping("/")
-    public String index(){
-        return "login/index";
+    public String index(Model model){
+        model.addAttribute("chosen", wRepo.fetchById(1));
+        return "login/newindex";
     }
+
+/*
+    @GetMapping("/")
+    public String index(Model model){
+        model.addAttribute("wNumber", wRepo.fetchAll());
+        model.addAttribute("chosen", wRepo.fetchById(1));
+        return "login/realindex";
+    }
+
+    @PostMapping("/{week_number}")
+    public String index(Model model, @PathVariable("week_number") String week_number){
+        System.out.println("Hello World");
+        for (int i = 0; i < 5; i++) {
+            System.out.println(week_number.toString());
+        }
+        model.addAttribute("wNumber", wRepo.fetchAll());
+        model.addAttribute("chosen", wRepo.fetchById(Integer.parseInt(week_number)));
+        return "login/realindex";
+    }
+
+ */
 
     @GetMapping("/loginpage")
     public String loginpage(){
+
         return "login/loginpage";
     }
 
@@ -59,17 +86,34 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/weekPage")
-    public String weekPage(Model model){
-        List<Weekplans> week_number = wRepo.fetchAll();
-        model.addAttribute("week_number", week_number);
+    /*
+    @GetMapping("/weekPage/{week_number}")
+    public String weekPage(Model model, @PathVariable("week_number") String week_number){
+        List<Weekplans> weekplans = wRepo.fetchAll();
+        System.out.println(weekplans.get(0));
+        System.out.println(weekplans.get(2));
+        model.addAttribute("wNumber", weekplans);
+        Weekplans wPlans = wRepo.fetchById(Integer.parseInt(week_number));
+        System.out.println(wPlans.getMonday());
+        model.addAttribute("chosen", wPlans);
         return "userVersion/weekPage";
     }
 
-    @PostMapping("/week_number/{week_number}")
-    public String weekPage(Model model, @PathVariable("week_number") int week_number){
+    @PostMapping("/weekPage/{week_number}")
+    public String weekPage(Model model, @PathVariable("week_number") String week_number){
+        model.addAttribute("wNumber", wRepo.fetchAll());
+        int weekNumber = Integer.parseInt(week_number);
+        Weekplans chosenWeek = wRepo.fetchById(weekNumber);
+        model.addAttribute("chosen", chosenWeek);
+        return "userVersion/weekPage";
+    }
 
-        return "redirect:/weekPage";
+     */
+
+    @GetMapping("/viewDinner")
+    public String viewDinner(@ModelAttribute ComboObject object){
+        System.out.println(object.getWeek_number() + " and " + object.getWednesday());
+        return "userVersion/viewDinner";
     }
 
     @GetMapping("/testPage")

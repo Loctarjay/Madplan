@@ -7,11 +7,12 @@
 </head>
 <body>
 <h1>Choose a day to cook dinner</h1>
+<h2 th:text="@{'Week Number: '+${chosen.week_number}"/>
 
-<form action="@{'/week_number/'+${week_number}}" method="POST">
+<form th:action="@{'/weekPage/'+${week_number}}" method="post">
     <select name="week_number" class="select" onchange="this.form.submit()">
         <option value="0">-- Choose Week --</option>
-        <p th:each="w : ${week_number}">
+        <p th:each="w : ${wNumber}">
             <option th:text="${w.week_number}"/>
         </p>
     </select>
@@ -30,9 +31,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="week : ${week_info}">
+    <tr>
         <td>
-            <a th:text="week.monday"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${chosen.monday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
@@ -42,7 +43,7 @@
 
         </td>
         <td>
-            <a th:text="week.tuesday"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${chosen.tuesday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
