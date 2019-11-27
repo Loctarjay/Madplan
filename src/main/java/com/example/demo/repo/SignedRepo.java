@@ -16,7 +16,6 @@ public class SignedRepo {
 
     public List<Person> checkDays(){
         String sql = "SELECT s.*, p.* FROM signed_up s JOIN persons p ON s.fk_room_id=p.room_id WHERE chosen_date=?";
-       // String sql = "SELECT * FROM madklub.signed_up WHERE day_of_week=1";
         RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
         return template.query(sql, rowMapper, "2019/11/27");
     }
