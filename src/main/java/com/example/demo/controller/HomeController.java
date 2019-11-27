@@ -111,7 +111,7 @@ public class HomeController {
      */
 
     @GetMapping("/viewDinner")
-    public String viewDinner(@ModelAttribute ComboObject object){
+    public String viewDinner(Model model, @ModelAttribute ComboObject object){
         System.out.println(object.getWeek_number() + " and " + object.getWednesday());
         return "userVersion/viewDinner";
     }
