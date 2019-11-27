@@ -9,6 +9,14 @@
     <h1>Welcome to the Dinner Club's booking site!</h1>
     <h2 th:text="@{'Week Number: '+${chosen.week_number}}"/>
 
+    <form th:action="@{'/'}" method="post">
+        <select name="week_number" class="select" onchange="this.form.submit()">
+            <option value="0">-- Choose Week --</option>
+            <p th:each="w : ${wNumber}">
+                <option th:text="${w.week_number}"/>
+            </p>
+        </select>
+    </form>
     <table>
         <thead>
         <tr>
@@ -123,6 +131,7 @@
     <a href="/loginpage">
         <button>Login</button>
     </a>
+
 
 </body>
 </html>

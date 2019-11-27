@@ -7,8 +7,9 @@
 </head>
 <body>
 <h1>Choose a day to cook dinner</h1>
-<h2 th:text="@{'Week Number: '+${chosen.week_number}"/>
+<h2 th:text="@{'Week Number: '+${chosen.week_number}}"/>
 
+<!--
 <form th:action="@{'/weekPage/'+${week_number}}" method="post">
     <select name="week_number" class="select" onchange="this.form.submit()">
         <option value="0">-- Choose Week --</option>
@@ -17,6 +18,7 @@
         </p>
     </select>
 </form>
+-->
 
 <table>
     <thead>

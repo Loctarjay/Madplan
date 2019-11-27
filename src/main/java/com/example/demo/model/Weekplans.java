@@ -14,6 +14,7 @@ public class Weekplans {
     private String friday;
     private String saturday;
     private String sunday;
+    private String day;
 
     public Weekplans() {
     }
@@ -24,32 +25,54 @@ public class Weekplans {
 
     public Weekplans(int week_number, String day, String room_id) {
         this.week_number = week_number;
-        setDay(day, room_id);
+        this.day = day;
+        setDayInfo(room_id);
     }
 
-    private void setDay(String day, String room_id){
-        switch (day) {
+    private void setDayInfo(String room_id){
+        switch (this.day) {
             case "monday":
-                setMonday(room_id);
+                this.monday = room_id;
                 break;
             case "tuesday":
-                setTuesday(room_id);
+                this.tuesday = room_id;
                 break;
             case "wednesday":
-                setWednesday(room_id);
+                this.wednesday = room_id;
                 break;
             case "thursday":
-                setThursday(room_id);
+                this.thursday = room_id;
                 break;
             case "friday":
-                setFriday(room_id);
+                this.friday = room_id;
                 break;
             case "saturday":
-                setSaturday(room_id);
+                this.saturday = room_id;
                 break;
             case "sunday":
-                setSunday(room_id);
+                this.sunday = room_id;
                 break;
+        }
+    }
+
+    public String getDayInfo(String day){
+        switch(day){
+            case "monday":
+                return getMonday();
+            case "tuesday":
+                return getTuesday();
+            case "wednesday":
+                return getWednesday();
+            case "thursday":
+                return getThursday();
+            case "friday":
+                return getFriday();
+            case "saturday":
+                return getSaturday();
+            case "sunday":
+                return getSunday();
+            default:
+                return "none";
         }
     }
 
@@ -115,5 +138,13 @@ public class Weekplans {
 
     public void setSunday(String sunday) {
         this.sunday = sunday;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 }

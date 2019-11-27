@@ -3,7 +3,7 @@ body{
     background-image: url("logo.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center;
+    background-position: top left;
 }
 table{
     margin-left: auto;

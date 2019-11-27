@@ -1,6 +1,5 @@
 package com.example.demo.repo;
 
-import com.example.demo.model.Person;
 import com.example.demo.model.Weekplans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -24,7 +23,6 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
         if (!weekNumber.isEmpty()){
             return weekNumber;
         } else{
-            System.out.println("Empty !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             for (int i = 1; i <= 52; i++){
                 String insertionSql = "INSERT INTO weekplans (week_number) VALUES (?)";
                 template.update(insertionSql, i);
@@ -42,11 +40,17 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
         return null;
     }
 
-
     public Weekplans fetchById(int week_number) {
         String sql = "SELECT * FROM weekplans WHERE week_number = ? ORDER BY week_number";
         RowMapper<Weekplans> rowMapper = new BeanPropertyRowMapper<>(Weekplans.class);
-        return template.queryForObject(sql, rowMapper, week_number);
+        Weekplans wp = template.queryForObject(sql, rowMapper, week_number);
+        return wp;
+    }
+    public String fetchSpecificDayInfo(int week_number, String day){
+        String sql = "SELECT " + day + " FROM weekplans WHERE week_number = ?";
+        RowMapper<Weekplans> rowMapper = new BeanPropertyRowMapper<>(Weekplans.class);
+        String dayInfo = template.queryForObject(sql, rowMapper, week_number).getDayInfo(day);
+        return dayInfo;
     }
 
     @Override

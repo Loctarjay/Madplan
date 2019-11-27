@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.ComboObject;
-import com.example.demo.model.Person;
-import com.example.demo.model.Signed_up;
-import com.example.demo.model.Weekplans;
-import com.example.demo.repo.ComboRepo;
+import com.example.demo.model.*;
+import com.example.demo.repo.DinnerRepo;
 import com.example.demo.repo.PersonRepo;
 import com.example.demo.repo.SignedRepo;
 import com.example.demo.repo.WeekplansRepo;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -26,40 +22,26 @@ public class HomeController {
     @Autowired
     WeekplansRepo wRepo;
     @Autowired
-    ComboRepo cRepo;
-    @Autowired
     SignedRepo sRepo;
+    @Autowired
+    DinnerRepo dRepo;
 
-    @GetMapping("/")
-    public String index(Model model){
-        model.addAttribute("chosen", wRepo.fetchById(1));
-        return "login/newindex";
-    }
-
-/*
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("wNumber", wRepo.fetchAll());
         model.addAttribute("chosen", wRepo.fetchById(1));
-        return "login/realindex";
+        return "login/index";
     }
 
-    @PostMapping("/{week_number}")
-    public String index(Model model, @PathVariable("week_number") String week_number){
-        System.out.println("Hello World");
-        for (int i = 0; i < 5; i++) {
-            System.out.println(week_number.toString());
-        }
+    @PostMapping("/")
+    public String index(Model model, @ModelAttribute Weekplans weekplans){
         model.addAttribute("wNumber", wRepo.fetchAll());
-        model.addAttribute("chosen", wRepo.fetchById(Integer.parseInt(week_number)));
-        return "login/realindex";
+        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
+        return "login/index";
     }
-
- */
 
     @GetMapping("/loginpage")
     public String loginpage(){
-
         return "login/loginpage";
     }
 
@@ -108,8 +90,7 @@ public class HomeController {
      */
 
     @GetMapping("/viewDinner")
-    public String viewDinner(Model model, @ModelAttribute ComboObject object){
-        System.out.println(object.getWeek_number() + " and " + object.getWednesday());
+    public String viewDinner(Model model){
         return "userVersion/viewDinner";
     }
 
@@ -125,6 +106,28 @@ public class HomeController {
         pRepo.date();
         return "userVersion/testPage";
     }
+
+    @GetMapping("/createDinner")
+    public String createDinner(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
+        String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
+        model.addAttribute("person", pRepo.fetchById(room_id));
+        model.addAttribute("dinner", dRepo.fetchById(room_id));
+        return "userVersion/createDinner";
+    }
+
+    /*
+    @PostMapping("/createDinner")
+    public String createDinner(Model model, @ModelAttribute testObject testO){
+        dRepo.update(testO);
+        model.addAttribute("chosen", wRepo.fetchById(testO.getWeek_number()));
+        String room_id = wRepo.fetchSpecificDayInfo(testO.getWeek_number(), testO.getDay());
+        model.addAttribute("person", pRepo.fetchById(room_id));
+        model.addAttribute("dinner", dRepo.fetchById(room_id));
+        return "userVersion/createDinner";
+    }
+
+     */
 
 
 
