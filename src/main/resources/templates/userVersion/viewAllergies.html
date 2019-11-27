@@ -7,20 +7,22 @@
 </head>
 <body>
 
-    <h1>SEE ALLERGIES</h1>
+    <h1>Members signed up for dinner</h1>
 
     <table class="center">
         <thead>
         <tr>
-            <th>Room Number</th>
+            <th>Room Id</th>
+            <th>Name</th>
             <th>Allergies</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <!-- Thymeleaf loop der opretter personobjekter fra dataen i databasen og viser dem i en tabel. -->
-        <tr th:each="persons: ${personer}">
+        <tr th:each="persons: ${registeredEaters}">
             <td th:text="${persons.room_id}"/>
+            <td th:text="${persons.first_name}"/>
             <td th:text="${persons.allergies}"/>
         </tr>
         </tbody>

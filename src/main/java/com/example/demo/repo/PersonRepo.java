@@ -47,7 +47,6 @@ public class PersonRepo implements RepoInterface<Person> {
     public void update(Person p) {
 
     }
-
     public Boolean loginTest(Person p){
         Boolean loginTest = false;
         String sql = "SELECT * FROM persons";
@@ -68,12 +67,11 @@ public class PersonRepo implements RepoInterface<Person> {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currentTime = LocalDateTime.now();
         System.out.println("Current time of day: " + dtf.format(currentTime));
-        //Udskift nedenstående med dato fra database - Skal være dagen man prøvet at tilmelde sig til
+        //Udskift nedenstående med dato fra database - Skal være dagen man prøver at tilmelde sig til
         LocalDateTime test = LocalDateTime.of(2019,11,25,16,00);
 
         int difference = currentTime.compareTo(test);
         System.out.println(currentTime.compareTo(test));
-        System.out.println(test.getHour());
         if (test.getHour() >= 16 && difference <= 0 || difference >= 0){
             System.out.println("Can't book, to close to date");
         }else{

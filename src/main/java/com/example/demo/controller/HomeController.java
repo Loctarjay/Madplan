@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.model.ComboObject;
 import com.example.demo.model.Person;
+import com.example.demo.model.Signed_up;
 import com.example.demo.model.Weekplans;
 import com.example.demo.repo.ComboRepo;
 import com.example.demo.repo.PersonRepo;
+import com.example.demo.repo.SignedRepo;
 import com.example.demo.repo.WeekplansRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class HomeController {
     WeekplansRepo wRepo;
     @Autowired
     ComboRepo cRepo;
+    @Autowired
+    SignedRepo sRepo;
 
     @GetMapping("/")
     public String index(Model model){
@@ -68,13 +72,6 @@ public class HomeController {
         }
     }
 
-    @GetMapping("/viewAllergies")
-    public String viewAllergies(Model model){
-        List<Person> personList = pRepo.fetchAll();
-        model.addAttribute("personer", personList);
-        return "userVersion/viewAllergies";
-    }
-
     @GetMapping("/sign_up_page")
     public String sign_up_page(){
         return "login/sign_up_page";
@@ -114,6 +111,13 @@ public class HomeController {
     public String viewDinner(Model model, @ModelAttribute ComboObject object){
         System.out.println(object.getWeek_number() + " and " + object.getWednesday());
         return "userVersion/viewDinner";
+    }
+
+    @GetMapping("/viewAllergies")
+    public String viewAllergies(Model model, @ModelAttribute Signed_up signed_up){
+        List<Person> personList = sRepo.checkDays();
+        model.addAttribute("registeredEaters", personList);
+        return "userVersion/viewAllergies";
     }
 
     @GetMapping("/testPage")
