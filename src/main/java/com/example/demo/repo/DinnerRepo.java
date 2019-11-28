@@ -9,7 +9,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class DinnerRepo implements RepoInterface<Dinner> {
@@ -51,5 +57,45 @@ public class DinnerRepo implements RepoInterface<Dinner> {
         System.out.println(tO.getDescription());
         String sql = "UPDATE dinner SET fk_room_id = ?, dinner_name = ?, description = ?";
         template.update(sql, tO.getFk_room_id(), tO.getDinner_name(), tO.getDescription());
+    }
+
+    public void date(){
+        LocalDateTime currentTime = LocalDateTime.now();
+        //System.out.println("Current time of day: " + dtf.format(currentTime));
+        //Udskift nedenstående med dato fra database - Skal være dagen man prøver at tilmelde sig til
+
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime test = LocalDateTime.of(2019,5,25,16,00);
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        int weekNumber = test.get(weekFields.weekOfWeekBasedYear());
+        System.out.println(weekNumber);
+        System.out.println(weekFields.dayOfWeek());
+
+
+
+        int difference = currentTime.compareTo(test);
+        //System.out.println(currentTime.compareTo(test));
+        if (test.getHour() >= 16 && difference <= 0 || difference >= 0){
+            System.out.println("Can't book, to close to date");
+        }else{
+            System.out.println("Dinner booked! :D");
+        }
+    }
+
+    public void dateTester(int week_number){
+
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+
+        Calendar cld = Calendar.getInstance();
+        cld.set(Calendar.YEAR, 2019);
+        cld.set(Calendar.WEEK_OF_YEAR, week_number);
+        int day_number = 0;
+        if ("MONDAY".equals(weekFields.dayOfWeek())) {
+            day_number = 1;
+        } else if ("TUESDAY".equals(weekFields))
+        cld.set(Calendar.DAY_OF_WEEK, day_number);
+        Date result = cld.getTime();
+        System.out.println(result);
     }
 }
