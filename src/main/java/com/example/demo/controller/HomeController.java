@@ -50,7 +50,7 @@ public class HomeController {
         if(!pRepo.loginTest(person)){
             return "login/loginpage";
         }else {
-            return "redirect:/weekPage";
+            return "redirect:/testPage";
         }
     }
 
@@ -102,7 +102,8 @@ public class HomeController {
     }
 
     @GetMapping("/testPage")
-    public String test_page(){
+    public String test_page(Model model){
+        model.addAttribute("person", pRepo.fetchById("A15"));
         pRepo.date();
         return "userVersion/testPage";
     }

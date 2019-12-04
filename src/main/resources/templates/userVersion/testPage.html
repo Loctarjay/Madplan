@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Before 16:00</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
-<body>
+<body onload="reminderAlert()">
 
+<script th:inline="javascript">
+$(document).ready(function reminderAlert() {
 
+    Date.prototype.getWeek = function () {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    };
 
+    var myDate = new Date();
+    var currentWeek = myDate.getWeek();
+    var weeks_since = [[${person.last_cooked}]];
+    var difference = (currentWeek - weeks_since);
+    if (difference >= 5){
+        alert("It's been over 5 weeks since you've last cooked for your friends, please consider that it's time to cook again soon");
+    }
+})
+
+</script>
 
 
 </body>

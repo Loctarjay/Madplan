@@ -11,6 +11,7 @@ public class Person {
     private String last_name;
     private String password;
     private String allergies;
+    private int last_cooked;
 
     public Person(){    }
 
@@ -65,5 +66,13 @@ public class Person {
 
     public void setAllergies(String allergies) {
         this.allergies = allergies;
+    }
+
+    public int getLast_cooked() {
+        return last_cooked;
+    }
+
+    public void setLast_cooked(int last_cooked) {
+        this.last_cooked = last_cooked;
     }
 }
