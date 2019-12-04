@@ -1,21 +1,15 @@
 package com.example.demo.repo;
 
 import com.example.demo.model.Dinner;
-import com.example.demo.model.Person;
-import com.example.demo.model.testObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.WeekFields;
+import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Repository
 public class DinnerRepo implements RepoInterface<Dinner> {
@@ -29,16 +23,22 @@ public class DinnerRepo implements RepoInterface<Dinner> {
     }
 
     @Override
-    public Dinner fetchById(String fk_room_id) {
-        String sql = "SELECT * FROM dinner WHERE fk_room_id=?";
+    public Dinner fetchById(String id) { return null; }
+
+
+    public Dinner fetchById(String fk_room_id, int week_number, String day) {
+        String sql = "SELECT * FROM dinner WHERE fk_room_id = ? AND chosen_date = ?";
         RowMapper<Dinner> rowMapper = new BeanPropertyRowMapper<>(Dinner.class);
-        return template.queryForObject(sql, rowMapper, fk_room_id);
+        return template.queryForObject(sql, rowMapper, fk_room_id, getChosenDate(week_number, day));
     }
 
     @Override
-    public void create(Dinner d) {
-        String sql = "INSERT INTO dinner (fk_room_id, dinner_name, description) VALUES (?, ?, ?)";
-        template.update(sql, d.getFk_room_id(), d.getDinner_name(), d.getDescription());
+    public void create(Dinner dinner) { }
+
+
+    public void create(Dinner d, int week_number, String day) {
+        String sql = "INSERT INTO dinner (fk_room_id, dinner_name, description, chosen_date) VALUES (?, ?, ?, ?)";
+        template.update(sql, d.getFk_room_id(), d.getDinner_name(), d.getDescription(), getChosenDate(week_number, day));
     }
 
     @Override
@@ -47,55 +47,35 @@ public class DinnerRepo implements RepoInterface<Dinner> {
     }
 
     @Override
-    public void update(Dinner dinner) {
-
+    public void update(Dinner d) {
+        System.out.println(d.getFk_room_id());
+        System.out.println(d.getDinner_name());
+        System.out.println(d.getDescription());
+        System.out.println(d.getChosen_date());
+        String sql = "UPDATE dinner SET dinner_name = ?, description = ? WHERE fk_room_id = ? AND chosen_date = ?";
+        template.update(sql, d.getDinner_name(), d.getDescription(), d.getFk_room_id(), d.getChosen_date());
     }
 
-    public void update(testObject tO) {
-        System.out.println(tO.getFk_room_id());
-        System.out.println(tO.getDinner_name());
-        System.out.println(tO.getDescription());
-        String sql = "UPDATE dinner SET fk_room_id = ?, dinner_name = ?, description = ?";
-        template.update(sql, tO.getFk_room_id(), tO.getDinner_name(), tO.getDescription());
-    }
-
-    public void date(){
-        LocalDateTime currentTime = LocalDateTime.now();
-        //System.out.println("Current time of day: " + dtf.format(currentTime));
-        //Udskift nedenstående med dato fra database - Skal være dagen man prøver at tilmelde sig til
-
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime test = LocalDateTime.of(2019,5,25,16,00);
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int weekNumber = test.get(weekFields.weekOfWeekBasedYear());
-        System.out.println(weekNumber);
-        System.out.println(weekFields.dayOfWeek());
-
-
-
-        int difference = currentTime.compareTo(test);
-        //System.out.println(currentTime.compareTo(test));
-        if (test.getHour() >= 16 && difference <= 0 || difference >= 0){
-            System.out.println("Can't book, to close to date");
-        }else{
-            System.out.println("Dinner booked! :D");
+    public String getChosenDate(int week_number, String day){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.WEEK_OF_YEAR, week_number);
+        if (day.equals("monday")){
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        } else if (day.equals("tuesday")){
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+        } else if (day.equals("wednesday")){
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+        } else if (day.equals("thursday")){
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+        } else if (day.equals("friday")){
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+        } else if (day.equals("saturday")){
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        } else if (day.equals("sunday")){
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         }
-    }
+        DateFormat defaultFormat = DateFormat.getDateInstance();
 
-    public void dateTester(int week_number){
-
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-
-        Calendar cld = Calendar.getInstance();
-        cld.set(Calendar.YEAR, 2019);
-        cld.set(Calendar.WEEK_OF_YEAR, week_number);
-        int day_number = 0;
-        if ("MONDAY".equals(weekFields.dayOfWeek())) {
-            day_number = 1;
-        } else if ("TUESDAY".equals(weekFields))
-        cld.set(Calendar.DAY_OF_WEEK, day_number);
-        Date result = cld.getTime();
-        System.out.println(result);
+        return defaultFormat.format(cal.getTime());
     }
 }

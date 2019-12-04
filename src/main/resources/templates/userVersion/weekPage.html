@@ -6,10 +6,12 @@
     <title>Dinner Club</title>
 </head>
 <body>
-<h1>Choose a day to cook dinner</h1>
+<h1>Choose a day to see options</h1>
 <h2 th:text="@{'Week Number: '+${chosen.week_number}}"/>
 
-<label th:text="'Welcome: ' + ${person.first_name} + '. Select a day to cook or eat.'"/>
+<label th:text="'Welcome: ' + ${person.first_name} + '.'"/>
+<br>
+<label>Select a day to cook or eat.</label>
 
 <form th:action="@{'/weekPage'}" method="post">
     <select name="week_number" class="select" onchange="this.form.submit()">
@@ -34,12 +36,12 @@
     </thead>
     <tbody>
     <tr>
-        <td>
+        <td >
             <a th:text="${chosen.monday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
-            <form th:action="@{'/createDinner'}" method="get">
+            <form th:action="@{'/dinnerOption'}" method="get">
                 <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
                 <input type="hidden" name="day" value="monday"/>
                 <input type="hidden" name="monday" th:value="${chosen.monday}"/>
@@ -52,77 +54,88 @@
 
             <br>
 
-            <form th:action="@{'/createDinner'}" method="get">
+            <form th:action="@{'/dinnerOption'}" method="get">
                 <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
                 <input type="hidden" name="day" value="tuesday"/>
-                <input type="hidden" name="monday" th:value="${chosen.monday}"/>
+                <input type="hidden" name="tuesday" th:value="${chosen.tuesday}"/>
                 <button type="submit">Dinner Details</button>
             </form>
 
         </td>
         <td>
-            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${chosen.wednesday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
-
-            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
-                <button class="btn">View day</button>
-
-            </b>
+            <form th:action="@{'/dinnerOption'}" method="get">
+                <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+                <input type="hidden" name="day" value="wednesday"/>
+                <input type="hidden" name="wednesday" th:value="${chosen.wednesday}"/>
+                <button type="submit">Dinner Details</button>
+            </form>
 
         </td>
         <td>
-            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${chosen.thursday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
-
-            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
-                <button class="btn">View day</button>
-
-            </b>
+            <form th:action="@{'/dinnerOption'}" method="get">
+                <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+                <input type="hidden" name="day" value="thursday"/>
+                <input type="hidden" name="thursday" th:value="${chosen.thursday}"/>
+                <button type="submit">Dinner Details</button>
+            </form>
 
         </td>
         <td>
-            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${chosen.friday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
-
-            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
-                <button class="btn">View day</button>
-
-            </b>
+            <form th:action="@{'/dinnerOption'}" method="get">
+                <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+                <input type="hidden" name="day" value="friday"/>
+                <input type="hidden" name="friday" th:value="${chosen.friday}"/>
+                <button type="submit">Dinner Details</button>
+            </form>
 
         </td>
         <td>
-            <a>  </a> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${chosen.saturday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
-
-            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
-                <button class="btn">View day</button>
-
-            </b>
+            <form th:action="@{'/dinnerOption'}" method="get">
+                <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+                <input type="hidden" name="day" value="saturday"/>
+                <input type="hidden" name="saturday" th:value="${chosen.saturday}"/>
+                <button type="submit">Dinner Details</button>
+            </form>
 
         </td>
         <td>
-            <a> test 7 </a> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${chosen.sunday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
-
-            <b> <!--     Inde i b-tagget skal der være 1 knap der linker til info om dagens ret          -->
-                <button class="btn">View day</button>
-
-            </b>
+            <form th:action="@{'/dinnerOption'}" method="get">
+                <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+                <input type="hidden" name="day" value="sunday"/>
+                <input type="hidden" name="sunday" th:value="${chosen.sunday}"/>
+                <button type="submit">Dinner Details</button>
+            </form>
 
         </td>
     </tr>
     </tbody>
 </table>
+
+
+<form th:action="@{'/'}" method="post">
+    <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+    <button type="submit">Front Page</button>
+</form>
 
 
 </body>

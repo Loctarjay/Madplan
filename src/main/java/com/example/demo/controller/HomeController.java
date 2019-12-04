@@ -96,8 +96,13 @@ public class HomeController {
     */
 
     @GetMapping("/viewDinner")
-    public String viewDinner(Model model){
-        return "userVersion/viewDinner";
+    public String viewDinner(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
+        String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
+        model.addAttribute("person", pRepo.fetchById(room_id));
+        model.addAttribute("dinner", dRepo.fetchById(room_id));
+        dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
+        return "dinner/viewDinner";
     }
 
     @GetMapping("/viewAllergies")
@@ -116,12 +121,34 @@ public class HomeController {
 
     @GetMapping("/createDinner")
     public String createDinner(Model model, @ModelAttribute Weekplans weekplans){
-        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
-        String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
-        model.addAttribute("person", pRepo.fetchById(room_id));
-        model.addAttribute("dinner", dRepo.fetchById(room_id));
-        return "userVersion/createDinner";
+        model.addAttribute("chosen", weekplans);
+        model.addAttribute("person", pRepo.fetchById(loggedIn.getRoom_id()));
+        model.addAttribute("date", dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay()));
+        return "dinner/createDinner";
     }
+
+    @PostMapping("/createDinner")
+    public String createDinner(@ModelAttribute testObject to){
+        Dinner d = new Dinner(to.getFk_room_id(), to.getDinner_name(), to.getDescription());
+        dRepo.create(d, to.getWeek_number(), to.getDay());
+        return "redirect:/editDinner";
+    }
+
+    @GetMapping("/editDinner")
+    public String editDinner(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("chosen", weekplans);
+        model.addAttribute("person", loggedIn.getFirst_name());
+        model.addAttribute("dinner", dRepo.fetchById(loggedIn.getRoom_id(), weekplans.getWeek_number(), weekplans.getDay()));
+        return "redirect:dinner/editDinner";
+    }
+/*
+    @PostMapping("dinner/editDinner")
+    public String editDinner(@ModelAttribute Weekplans weekplans){
+        //dRepo.update();
+        return "dinner/editDinner";
+    }
+
+ */
 
     /*
     @PostMapping("/createDinner")
@@ -135,6 +162,13 @@ public class HomeController {
     }
 
      */
+
+    @GetMapping("/dinnerOption")
+    public String dinnerOption(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("chosen", weekplans);
+
+        return "dinner/dinnerOption";
+    }
 
 
 

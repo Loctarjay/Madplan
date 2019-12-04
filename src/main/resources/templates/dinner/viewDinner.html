@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="MyCSS.css">
+    <title>Dinner Club</title>
+</head>
+<body>
+<h1>Dinner description</h1>
+<h2 th:text="@{'Week Number: '+${chosen.week_number}}"></h2>
+<br>
+
+<label th:text="'Name of the cook: ' + ${person.first_name}"/>
+
+<br>
+<label name="dinner_name" th:value="${dinner.dinner_name}"/>
+<label name="description" th:value="${dinner.description}"/>
+
+<a href="/viewAllergies">
+    <button>View Allergies</button>
+</a>
+
+
+<form th:action="@{'/'}" method="post">
+    <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+    <button type="submit">Front Page</button>
+</form>
+
+
+</body>
+</html>

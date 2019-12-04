@@ -10,6 +10,7 @@ public class Dinner {
     private String fk_room_id;
     private String dinner_name;
     private String description;
+    private String chosen_date;
 
     public Dinner() {
     }
@@ -18,6 +19,14 @@ public class Dinner {
         this.fk_room_id = fk_room_id;
         this.dinner_name = dinner_name;
         this.description = description;
+    }
+
+    public Dinner(int id, String fk_room_id, String dinner_name, String description, String chosen_date) {
+        this.id = id;
+        this.fk_room_id = fk_room_id;
+        this.dinner_name = dinner_name;
+        this.description = description;
+        this.chosen_date = chosen_date;
     }
 
     public int getId() {
@@ -51,4 +60,14 @@ public class Dinner {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getChosen_date() {
+        return chosen_date;
+    }
+
+    public void setChosen_date(String chosen_date) {
+        this.chosen_date = chosen_date;
+    }
+
+
 }

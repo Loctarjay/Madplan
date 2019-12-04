@@ -34,7 +34,7 @@ public class PersonRepo implements RepoInterface<Person> {
     @Override
     public void create(Person p) {
         String sql = "INSERT INTO persons (room_id, first_name, last_name, password, allergies) VALUES (?, ?, ?, ?, ?)";
-        template.update(sql,p.getRoom_id(), p.getFirst_name(), p.getLast_name(), p.getPassword(), p.getAllergies());
+        template.update(sql, p.getRoom_id(), p.getFirst_name(), p.getLast_name(), p.getPassword(), p.getAllergies());
     }
 
     @Override
@@ -68,7 +68,8 @@ public class PersonRepo implements RepoInterface<Person> {
         LocalDateTime currentTime = LocalDateTime.now();
         System.out.println("Current time of day: " + dtf.format(currentTime));
         //Udskift nedenstående med dato fra database - Skal være dagen man prøver at tilmelde sig til
-        LocalDateTime test = LocalDateTime.of(2019,11,25,16,00);
+        LocalDateTime test = LocalDateTime.of(2018,11,25, 0, 0);
+
 
         int difference = currentTime.compareTo(test);
         System.out.println(currentTime.compareTo(test));

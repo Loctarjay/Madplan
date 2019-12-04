@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="MyCSS.css">
+    <title>Dinner Club</title>
+</head>
+<body>
+<h1>Choose what you want to do</h1>
+<h2 th:text="@{'Chosen: '+${chosen.week_number} + ' ' +${chosen.day}}"/>
+
+
+<form th:action="@{'/createDinner'}" method="get">
+    <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+    <input type="hidden" name="day" th:value="${chosen.day}"/>
+    <button type="submit">Create Dinner</button>
+</form>
+<a>  </a>
+<form th:action="@{'/viewDinner'}" method="get">
+    <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+    <input type="hidden" name="day" th:value="${chosen.day}"/>
+    <button type="submit">Coming soon</button>
+</form>
+
+<br>
+<br>
+
+<form th:action="@{'/'}" method="post">
+    <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+    <button type="submit">Front Page</button>
+</form>
+
+</body>
+</html>

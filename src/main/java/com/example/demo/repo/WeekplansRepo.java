@@ -54,9 +54,7 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
     }
 
     @Override
-    public void create(Weekplans weekplans) {
-
-    }
+    public void create(Weekplans weekplans) { }
 
     @Override
     public Boolean deleteById(String id) {
@@ -64,7 +62,5 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
     }
 
     @Override
-    public void update(Weekplans weekplans) {
-
-    }
+    public void update(Weekplans weekplans) { }
 }

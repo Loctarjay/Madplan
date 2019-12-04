@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 public class testObject {
     private int week_number;
+    private String day;
     private String fk_room_id;
     private String dinner_name;
     private String description;
@@ -9,8 +10,9 @@ public class testObject {
     public testObject() {
     }
 
-    public testObject(int week_number, String fk_room_id, String dinner_name, String description) {
+    public testObject(int week_number, String day, String fk_room_id, String dinner_name, String description) {
         this.week_number = week_number;
+        this.day = day;
         this.fk_room_id = fk_room_id;
         this.dinner_name = dinner_name;
         this.description = description;
@@ -22,6 +24,14 @@ public class testObject {
 
     public void setWeek_number(int week_number) {
         this.week_number = week_number;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getFk_room_id() {
