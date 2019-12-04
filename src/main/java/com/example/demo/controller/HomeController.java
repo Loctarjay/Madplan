@@ -17,6 +17,8 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    Person loggedIn;
+
     @Autowired
     PersonRepo pRepo;
     @Autowired
@@ -50,7 +52,8 @@ public class HomeController {
         if(!pRepo.loginTest(person)){
             return "login/loginpage";
         }else {
-            return "redirect:/testPage";
+            loggedIn = person;
+            return "redirect:/weekPage";
         }
     }
 
@@ -65,20 +68,24 @@ public class HomeController {
         return "redirect:/";
     }
 
-    /*
-    @GetMapping("/weekPage/{week_number}")
-    public String weekPage(Model model, @PathVariable("week_number") String week_number){
-        List<Weekplans> weekplans = wRepo.fetchAll();
-        System.out.println(weekplans.get(0));
-        System.out.println(weekplans.get(2));
-        model.addAttribute("wNumber", weekplans);
-        Weekplans wPlans = wRepo.fetchById(Integer.parseInt(week_number));
-        System.out.println(wPlans.getMonday());
-        model.addAttribute("chosen", wPlans);
+    @GetMapping("/weekPage")
+    public String weekPage(Model model){
+        model.addAttribute("wNumber", wRepo.fetchAll());
+        model.addAttribute("chosen", wRepo.fetchById(1));
+        model.addAttribute("person", pRepo.fetchById(loggedIn.getRoom_id()));
         return "userVersion/weekPage";
     }
 
-    @PostMapping("/weekPage/{week_number}")
+    @PostMapping("/weekPage")
+    public String weekPage(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("wNumber", wRepo.fetchAll());
+        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
+        model.addAttribute("person", pRepo.fetchById(loggedIn.getRoom_id()));
+        return "userVersion/weekPage";
+    }
+
+    /*
+    @PostMapping("/weekPage")
     public String weekPage(Model model, @PathVariable("week_number") String week_number){
         model.addAttribute("wNumber", wRepo.fetchAll());
         int weekNumber = Integer.parseInt(week_number);
@@ -86,8 +93,7 @@ public class HomeController {
         model.addAttribute("chosen", chosenWeek);
         return "userVersion/weekPage";
     }
-
-     */
+    */
 
     @GetMapping("/viewDinner")
     public String viewDinner(Model model){
