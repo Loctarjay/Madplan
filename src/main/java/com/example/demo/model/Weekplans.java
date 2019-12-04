@@ -19,6 +19,11 @@ public class Weekplans {
     public Weekplans() {
     }
 
+    public Weekplans(int week_number, String day){
+        this.week_number = week_number;
+        this.day = day;
+    }
+
     public Weekplans(int week_number) {
         this.week_number = week_number;
     }
