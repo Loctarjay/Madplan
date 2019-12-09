@@ -14,16 +14,24 @@
 <label th:text="'Name of the cook: ' + ${person.first_name}"/>
 
 <br>
-<table>
+<table id="table_viewDinner">
     <thead>
-
-    </thead>
     <tr>
-
+        <th>Dish</th>
+        <th>Description</th>
     </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a th:text="${dinner.dinner_name}"/>
+        </td>
+        <td class="tdview">
+            <a th:text="${dinner.description}"/>
+        </td>
+    </tr>
+    </tbody>
 </table>
-<label th:text="${dinner.dinner_name}"/>
-<label th:text="${dinner.description}"/>
 <br>
 
 <a href="/viewAllergies">

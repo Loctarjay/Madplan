@@ -43,8 +43,12 @@ button{
 #table_upcoming{
     text-align: left;
     border-collapse: collapse;
-
 }
 tr:nth-child(n + 4) {
     visibility: hidden;
+}
+.tdview{
+    width: 200px;
+    word-wrap: break-word;
+    float: left;
 }
