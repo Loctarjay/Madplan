@@ -20,7 +20,9 @@ $(document).ready(function reminderAlert() {
     var currentWeek = myDate.getWeek();
     var weeks_since = [[${person.last_cooked}]];
     var difference = (currentWeek - weeks_since);
-    if (difference >= 5){
+    if (weeks_since == 0){
+
+    }else if (difference >= 5){
         alert("It's been over 5 weeks since you've last cooked for your friends, please consider that it's time to cook again soon");
     }
 })

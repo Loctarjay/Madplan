@@ -97,10 +97,11 @@ public class HomeController {
 
     @GetMapping("/viewDinner")
     public String viewDinner(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("day", weekplans);
         model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
         String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
         model.addAttribute("person", pRepo.fetchById(room_id));
-        model.addAttribute("dinner", dRepo.fetchById(room_id));
+        model.addAttribute("dinner", dRepo.fetchById(room_id, weekplans.getWeek_number(), weekplans.getDay()));
         dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
         return "dinner/viewDinner";
     }
@@ -131,7 +132,9 @@ public class HomeController {
     public String createDinner(@ModelAttribute testObject to){
         Dinner d = new Dinner(to.getFk_room_id(), to.getDinner_name(), to.getDescription());
         dRepo.create(d, to.getWeek_number(), to.getDay());
-        return "redirect:/editDinner";
+        Weekplans wp = new Weekplans(to.getWeek_number(), to.getDay(), to.getFk_room_id());
+        wRepo.create(wp);
+        return "redirect:/weekPage";
     }
 
     @GetMapping("/editDinner")

@@ -53,8 +53,27 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
         return dayInfo;
     }
 
+
     @Override
-    public void create(Weekplans weekplans) { }
+    public void create(Weekplans weekplans) {
+        String sql = "INSERT INTO weekplans SET week_number = " + weekplans.getWeek_number() +", "+ weekplans.getDay() + " = ? ON DUPLICATE KEY UPDATE " + weekplans.getDay() + " = ?";
+        if (weekplans.getDay().equals("monday")) {
+            template.update(sql, weekplans.getWeek_number(), weekplans.getMonday());
+        } else if (weekplans.getDay().equals("tuesday")){
+            System.out.println(weekplans.getTuesday());
+            template.update(sql, weekplans.getWeek_number(), weekplans.getTuesday());
+        } else if (weekplans.getDay().equals("wednesday")){
+            template.update(sql, weekplans.getWeek_number(), weekplans.getWednesday());
+        } else if (weekplans.getDay().equals("thursday")){
+            template.update(sql, weekplans.getWeek_number(), weekplans.getThursday());
+        } else if (weekplans.getDay().equals("friday")){
+            template.update(sql, weekplans.getWeek_number(), weekplans.getFriday());
+        } else if (weekplans.getDay().equals("saturday")){
+            template.update(sql, weekplans.getWeek_number(), weekplans.getSaturday());
+        } else if (weekplans.getDay().equals("sunday")){
+            template.update(sql, weekplans.getWeek_number(), weekplans.getSunday());
+        }
+    }
 
     @Override
     public Boolean deleteById(String id) {
@@ -63,4 +82,13 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
 
     @Override
     public void update(Weekplans weekplans) { }
+
+  /*  public List<Weekplans> upcoming(){
+
+        String sql = "";
+        RowMapper<Weekplans> rowMapper = new BeanPropertyRowMapper<>(Weekplans.class);
+        return
+    }
+*/
+
 }

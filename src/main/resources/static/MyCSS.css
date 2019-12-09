@@ -4,6 +4,7 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: top left;
+    background-size: 250px 250px;
 }
 table{
     margin-left: auto;
@@ -21,7 +22,7 @@ table.center{
 }
 th{
     padding: 5px;
-    background-color: orange;
+    background-color: yellow;
     color: black;
     text-align: center;
 }
@@ -36,5 +37,14 @@ a{
     text-decoration: none;
 }
 button{
-    color: purple;
+    color: white;
+    background: royalblue;
+}
+#table_upcoming{
+    text-align: left;
+    border-collapse: collapse;
+
+}
+tr:nth-child(n + 4) {
+    visibility: hidden;
 }

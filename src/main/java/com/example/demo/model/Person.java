@@ -15,17 +15,19 @@ public class Person {
 
     public Person(){    }
 
-    public Person(String room_id, String password){
+    public Person(String room_id, String password, int last_cooked){
         this.room_id = room_id;
         this.password = password;
+        this.last_cooked = last_cooked;
     }
 
-    public Person(String room_id, String first_name, String last_name, String password, String allergies){
+    public Person(String room_id, String first_name, String last_name, String password, String allergies, int last_cooked){
         this.room_id = room_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.password = password;
         this.allergies = allergies;
+        this.last_cooked = last_cooked;
     }
 
     public String getRoom_id() {
