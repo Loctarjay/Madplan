@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="MyCSS.css">
+    <title>Dinner Club</title>
+</head>
+<body>
+<h1>Dinner description</h1>
+<h2 th:text="@{'Week Number: '+${chosen.week_number}}"></h2>
+<h2 th:text="@{'Day of Week: '+${day.day}}"></h2>
+<br>
+
+<label th:text="'Name of the cook: ' + ${person.first_name}"/>
+
+<br>
+<table id="table_viewDinner">
+    <thead>
+    <tr>
+        <th>Dish</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a th:text="${dinner.dinner_name}"/>
+        </td>
+        <td class="tdview">
+            <a th:text="${dinner.description}"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<a href="/viewAllergies">
+    <button>View Allergies</button>
+</a>
+
+<br>
+
+<form th:action="@{'/dinnerSignUp'}" method="post">
+    <input type="hidden" name="fk_room_id" th:value="person.room_id"/>
+    <input type="hidden" name="week_number" th:value="chosen.week_number"/>
+    <input type="hidden" name="day" th:value="day.day"/>
+    <button type="submit">Dinner Sign Up</button>
+</form>
+
+
+<form th:action="@{'/'}" method="post">
+    <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+    <button type="submit">Front Page</button>
+</form>
+
+
+</body>
+</html>

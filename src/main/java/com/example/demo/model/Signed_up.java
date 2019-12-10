@@ -9,16 +9,23 @@ public class Signed_up {
     @Id
     private int id;
     private String fk_room_id;
-    private String day_of_week;
+    private String chosen_date;
+    private String day;
+    private String week_number;
 
     public Signed_up(){
 
     }
 
-    public Signed_up(int id, String fk_room_id, String day_of_week) {
-        this.id = id;
+    public Signed_up(String fk_room_id, String day, String week_number) {
         this.fk_room_id = fk_room_id;
-        this.day_of_week = day_of_week;
+        this.day = day;
+        this.week_number = week_number;
+    }
+
+    public Signed_up(int id, String fk_room_id, String chosen_date) {
+        this.fk_room_id = fk_room_id;
+        this.chosen_date = chosen_date;
     }
 
     public int getId() {
@@ -37,11 +44,27 @@ public class Signed_up {
         this.fk_room_id = fk_room_id;
     }
 
-    public String getDay_of_week() {
-        return day_of_week;
+    public String getChosen_date() {
+        return chosen_date;
     }
 
-    public void setDay_of_week(String day_of_week) {
-        this.day_of_week = day_of_week;
+    public void setChosen_date(String chosen_date) {
+        this.chosen_date = chosen_date;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getWeek_number() {
+        return week_number;
+    }
+
+    public void setWeek_number(String week_number) {
+        this.week_number = week_number;
     }
 }

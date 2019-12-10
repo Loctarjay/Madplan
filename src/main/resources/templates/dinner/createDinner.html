@@ -19,8 +19,9 @@
     <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
     <input type="hidden" name="day" th:value="${chosen.day}"/>
     <input type="hidden" name="fk_room_id" th:value="${person.room_id}"/>
-    <input type="text" name="dinner_name"/>
-    <input type="text" name="description"/>
+    <input type="hidden" name="first_name" th:value="${person.first_name}"/>
+    <input type="text" placeholder="Dinner Name" name="dinner_name"/>
+    <input type="text" placeholder="Dinner Description" name="description"/>
     <br>
     <button type="submit">Submit Dinner Info</button>
 </form>

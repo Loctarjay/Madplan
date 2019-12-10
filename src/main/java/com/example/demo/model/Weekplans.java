@@ -28,34 +28,34 @@ public class Weekplans {
         this.week_number = week_number;
     }
 
-    public Weekplans(int week_number, String day, String room_id) {
+    public Weekplans(int week_number, String day, String cook) {
         this.week_number = week_number;
         this.day = day;
-        setDayInfo(room_id);
+        setDayInfo(cook);
     }
 
-    private void setDayInfo(String room_id){
+    private void setDayInfo(String cook){
         switch (this.day) {
             case "monday":
-                this.monday = room_id;
+                this.monday = cook;
                 break;
             case "tuesday":
-                this.tuesday = room_id;
+                this.tuesday = cook;
                 break;
             case "wednesday":
-                this.wednesday = room_id;
+                this.wednesday = cook;
                 break;
             case "thursday":
-                this.thursday = room_id;
+                this.thursday = cook;
                 break;
             case "friday":
-                this.friday = room_id;
+                this.friday = cook;
                 break;
             case "saturday":
-                this.saturday = room_id;
+                this.saturday = cook;
                 break;
             case "sunday":
-                this.sunday = room_id;
+                this.sunday = cook;
                 break;
         }
     }

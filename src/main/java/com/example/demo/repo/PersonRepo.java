@@ -1,6 +1,7 @@
 package com.example.demo.repo;
 
 import com.example.demo.model.Person;
+import com.example.demo.model.Weekplans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository

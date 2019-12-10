@@ -53,7 +53,6 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
         return dayInfo;
     }
 
-
     @Override
     public void create(Weekplans weekplans) {
         String sql = "INSERT INTO weekplans SET week_number = " + weekplans.getWeek_number() +", "+ weekplans.getDay() + " = ? ON DUPLICATE KEY UPDATE " + weekplans.getDay() + " = ?";
@@ -82,6 +81,23 @@ public class WeekplansRepo implements RepoInterface<Weekplans> {
 
     @Override
     public void update(Weekplans weekplans) { }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /*  public List<Weekplans> upcoming(){
 

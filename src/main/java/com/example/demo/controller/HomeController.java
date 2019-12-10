@@ -173,6 +173,23 @@ public class HomeController {
         return "dinner/dinnerOption";
     }
 
+    @GetMapping("/dinnerSignUp")
+    public String dinnerSignUp(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("day", weekplans);
+        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
+        String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
+        model.addAttribute("person", pRepo.fetchById(room_id));
+        model.addAttribute("dinner", dRepo.fetchById(room_id, weekplans.getWeek_number(), weekplans.getDay()));
+        dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
+        return "dinner/dinnerSignUp";
+    }
+
+    @PostMapping("/dinnerSignUp")
+    public String dinnerSignUp(@ModelAttribute testObject to){
+        sRepo.create(loggedIn.getRoom_id(), to.getWeek_number(), to.getDay());
+        return "redirect:/weekPage";
+    }
+
 
 
 

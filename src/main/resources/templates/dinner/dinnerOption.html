@@ -15,11 +15,11 @@
     <input type="hidden" name="day" th:value="${chosen.day}"/>
     <button type="submit">Create Dinner</button>
 </form>
-<a>  </a>
-<form th:action="@{'/viewDinner'}" method="get">
+
+<form th:action="@{'/dinnerSignUp'}" method="get">
     <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
     <input type="hidden" name="day" th:value="${chosen.day}"/>
-    <button type="submit">Coming soon</button>
+    <button type="submit">Dinner Sign Up</button>
 </form>
 
 <br>
