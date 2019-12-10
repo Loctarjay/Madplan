@@ -107,9 +107,14 @@ public class HomeController {
     }
 
     @GetMapping("/viewAllergies")
-    public String viewAllergies(Model model, @ModelAttribute Signed_up signed_up){
+    public String viewAllergies(Model model, @ModelAttribute Weekplans weekplans){
+        model.addAttribute("day", weekplans);
+        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
+        String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
         List<Person> personList = sRepo.checkDays();
         model.addAttribute("registeredEaters", personList);
+        model.addAttribute("dinner", dRepo.fetchById(room_id, weekplans.getWeek_number(), weekplans.getDay()));
+        dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
         return "userVersion/viewAllergies";
     }
 

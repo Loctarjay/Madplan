@@ -17,9 +17,9 @@ public class SignedRepo {
     JdbcTemplate template;
 
     public List<Person> checkDays(){
-        String sql = "SELECT s.*, p.* FROM signed_up s JOIN persons p ON s.fk_room_id=p.room_id WHERE chosen_date=?";
+        String sql = "SELECT s.*, p.* FROM signed_up s JOIN persons p ON s.fk_room_id=p.room_id WHERE chosen_date = ?";
         RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
-        return template.query(sql, rowMapper, "2019/11/27");
+        return template.query(sql, rowMapper);
     }
 
     public void create(String room_id, int week_number, String day){
