@@ -18,7 +18,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
             <!-- Thymeleaf loop der opretter personobjekter fra dataen i databasen og viser dem i en tabel. -->
         <tr th:each="persons: ${registeredEaters}">
             <td th:text="${persons.room_id}"/>

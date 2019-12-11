@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head onload="signUp()">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="MyCSS.css">
     <title>Dinner Club</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 <body>
+<script th:inline="javascript">
+    $(document).ready(function signUp() {
+
+        if ('[[(${hourTest})]]' == 'true') {
+            console.log("Can book dinner, click the button! :D")
+            document.getElementById('sign').disabled = false;
+            document.getElementById('sign').style.backgroundColor = 'royalblue';
+        }else{
+            console.log("Date to close, can't sign up")
+            document.getElementById('sign').disabled = true;
+            document.getElementById('sign').style.backgroundColor="gray";
+        }
+    })
+
+</script>
 <h1>Dinner description</h1>
 <h2 th:text="@{'Week Number: '+${chosen.week_number}}"></h2>
 <h2 th:text="@{'Day of Week: '+${day.day}}"></h2>
@@ -46,7 +63,7 @@
     <input type="hidden" name="fk_room_id" th:value="${person.room_id}"/>
     <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
     <input type="hidden" name="day" th:value="${day.day}"/>
-    <button type="submit">Dinner Sign Up</button>
+    <button type="submit" id="sign">Dinner Sign Up</button>
 </form>
 
 

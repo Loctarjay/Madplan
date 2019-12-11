@@ -65,21 +65,24 @@ public class PersonRepo implements RepoInterface<Person> {
         return loginTest;
     }
 
-    public void date(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    public Boolean date(String date){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime currentTime = LocalDateTime.now();
-        System.out.println("Current time of day: " + dtf.format(currentTime));
-        //Udskift nedenstående med dato fra database - Skal være dagen man prøver at tilmelde sig til
-        LocalDateTime test = LocalDateTime.of(2018,11,25, 0, 0);
-
-
-        int difference = currentTime.compareTo(test);
-        System.out.println(currentTime.compareTo(test));
-        if (test.getHour() >= 16 && difference <= 0 || difference >= 0){
-            System.out.println("Can't book, to close to date");
-        }else{
-            System.out.println("Dinner booked! :D");
+        String temp = dtf.format(currentTime);
+        boolean result;
+        if (temp.compareTo(date) == -1) {
+            if (currentTime.getHour() >= 16) {
+                System.out.println("Can't book, to close to date");
+                result = false;
+            } else {
+                System.out.println("Dinner booked! :D");
+                result = true;
+            }
+        } else{
+            result = false;
         }
+        System.out.println(result);
+        return result;
     }
 
 }

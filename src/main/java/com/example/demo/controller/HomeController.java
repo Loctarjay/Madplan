@@ -111,7 +111,7 @@ public class HomeController {
         model.addAttribute("day", weekplans);
         model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
         String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
-        List<Person> personList = sRepo.checkDays();
+        List<Person> personList = sRepo.checkDays(weekplans.getWeek_number(), weekplans.getDay());
         model.addAttribute("registeredEaters", personList);
         model.addAttribute("dinner", dRepo.fetchById(room_id, weekplans.getWeek_number(), weekplans.getDay()));
         dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
@@ -121,7 +121,7 @@ public class HomeController {
     @GetMapping("/testPage")
     public String test_page(Model model){
         model.addAttribute("person", pRepo.fetchById("A15"));
-        pRepo.date();
+        //pRepo.date();
         return "userVersion/testPage";
     }
 
@@ -185,7 +185,7 @@ public class HomeController {
         String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
         model.addAttribute("person", pRepo.fetchById(room_id));
         model.addAttribute("dinner", dRepo.fetchById(room_id, weekplans.getWeek_number(), weekplans.getDay()));
-        dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
+        model.addAttribute("hourTest", pRepo.date(sRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay())));
         return "dinner/dinnerSignUp";
     }
 

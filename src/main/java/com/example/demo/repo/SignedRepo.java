@@ -16,10 +16,10 @@ public class SignedRepo {
     @Autowired
     JdbcTemplate template;
 
-    public List<Person> checkDays(){
+    public List<Person> checkDays(int week_number, String day){
         String sql = "SELECT s.*, p.* FROM signed_up s JOIN persons p ON s.fk_room_id=p.room_id WHERE chosen_date = ?";
         RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
-        return template.query(sql, rowMapper);
+        return template.query(sql, rowMapper, getChosenDate(week_number, day));
     }
 
     public void create(String room_id, int week_number, String day){
