@@ -3,6 +3,7 @@ package com.example.demo.repo;
 import com.example.demo.model.Person;
 import com.example.demo.model.Weekplans;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,19 +12,105 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PersonRepo implements RepoInterface<Person> {
     @Autowired
     JdbcTemplate template;
 
-
     @Override
     public List<Person> fetchAll() {
-        String sql = "SELECT * FROM persons";
+        return null;
+    }
+    public List<String> fetchAll(Weekplans w) {
+        String sql = "SELECT * FROM persons WHERE room_id = ?";
         RowMapper<Person> rowMapper = new BeanPropertyRowMapper<>(Person.class);
-        return template.query(sql, rowMapper);
+        List<String> room_id_List = new ArrayList<String>();
+        for (int i = 0; i < 7; i++) {
+            if (i == 0) {
+                try {
+                    Person p = template.queryForObject(sql, rowMapper, w.getMonday());
+                    if (p != null) {
+                        room_id_List.add(p.getRoom_id() + ": " + p.getFirst_name());
+                    } else {
+                        room_id_List.add("");
+                    }
+                } catch (EmptyResultDataAccessException emp){
+                    room_id_List.add("");
+                }
+            } else if (i == 1){
+                try {
+                    Person p = template.queryForObject(sql, rowMapper, w.getTuesday());
+                    if (p != null) {
+                        room_id_List.add(p.getRoom_id() + ": " + p.getFirst_name());
+                    } else {
+                        room_id_List.add("");
+                    }
+                } catch (EmptyResultDataAccessException emp){
+                    room_id_List.add("");
+                }
+            } else if (i == 2){
+                try {
+                    Person p = template.queryForObject(sql, rowMapper, w.getWednesday());
+                    if (p != null) {
+                        room_id_List.add(p.getRoom_id() + ": " + p.getFirst_name());
+                    } else {
+                        room_id_List.add("");
+                    }
+                } catch (EmptyResultDataAccessException emp){
+                    room_id_List.add("");
+                }
+            } else if (i == 3){
+                try {
+                    Person p = template.queryForObject(sql, rowMapper, w.getThursday());
+                    if (p != null) {
+                        room_id_List.add(p.getRoom_id() + ": " + p.getFirst_name());
+                    } else {
+                        room_id_List.add("");
+                    }
+                } catch (EmptyResultDataAccessException emp){
+                    room_id_List.add("");
+                }
+            } else if (i == 4){
+                try {
+                    Person p = template.queryForObject(sql, rowMapper, w.getFriday());
+                    if (p != null) {
+                        room_id_List.add(p.getRoom_id() + ": " + p.getFirst_name());
+                    } else {
+                        room_id_List.add("");
+                    }
+                } catch (EmptyResultDataAccessException emp){
+                    room_id_List.add("");
+                }
+            } else if (i == 5) {
+                try {
+                    Person p = template.queryForObject(sql, rowMapper, w.getSaturday());
+                    if (p != null) {
+                        room_id_List.add(p.getRoom_id() + ": " + p.getFirst_name());
+                    } else {
+                        room_id_List.add("");
+                    }
+                } catch (EmptyResultDataAccessException emp){
+                    room_id_List.add("");
+                }
+            } else if (i == 6){
+                try {
+                    Person p = template.queryForObject(sql, rowMapper, w.getSunday());
+                    if (p != null) {
+                        room_id_List.add(p.getRoom_id() + ": " + p.getFirst_name());
+                    } else {
+                        room_id_List.add("");
+                    }
+                } catch (EmptyResultDataAccessException emp){
+                    room_id_List.add("");
+                }
+            }
+
+        }
+        return room_id_List;
     }
 
     @Override

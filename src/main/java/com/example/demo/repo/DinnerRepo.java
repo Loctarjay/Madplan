@@ -48,10 +48,6 @@ public class DinnerRepo implements RepoInterface<Dinner> {
 
     @Override
     public void update(Dinner d) {
-        System.out.println(d.getFk_room_id());
-        System.out.println(d.getDinner_name());
-        System.out.println(d.getDescription());
-        System.out.println(d.getChosen_date());
         String sql = "UPDATE dinner SET dinner_name = ?, description = ? WHERE fk_room_id = ? AND chosen_date = ?";
         template.update(sql, d.getDinner_name(), d.getDescription(), d.getFk_room_id(), d.getChosen_date());
     }

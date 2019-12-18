@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Choose what you want to do</h1>
-<h2 th:text="@{'Chosen: '+${chosen.week_number} + ' ' +${chosen.day}}"/>
+<h2 th:text="@{'Chosen week and day: '+${chosen.week_number} + ' ' +${chosen.day}}"/>
 
 
 <form th:action="@{'/createDinner'}" method="get">

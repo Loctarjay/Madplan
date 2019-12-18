@@ -34,9 +34,12 @@
 </table>
 <br>
 
-<a href="/viewAllergies">
-    <button>View Allergies</button>
-</a>
+
+<form th:action="@{'/viewAllergies'}" method="get">
+    <input type="hidden" name="week_number" th:value="${chosen.week_number}"/>
+    <input type="hidden" name="day" th:value="${day.day}"/>
+    <button type="submit">View Participants</button>
+</form>
 
 
 <form th:action="@{'/'}" method="post">

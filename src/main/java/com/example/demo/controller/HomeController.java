@@ -31,14 +31,18 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("wNumber", wRepo.fetchAll());
-        model.addAttribute("chosen", wRepo.fetchById(1));
+        Weekplans wP = wRepo.fetchById(1);
+        model.addAttribute("chosen", wP);
+        model.addAttribute("person", pRepo.fetchAll(wP));
         return "login/index";
     }
 
     @PostMapping("/")
     public String index(Model model, @ModelAttribute Weekplans weekplans){
         model.addAttribute("wNumber", wRepo.fetchAll());
-        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
+        Weekplans wP = wRepo.fetchById(weekplans.getWeek_number());
+        model.addAttribute("chosen", wP);
+        model.addAttribute("person", pRepo.fetchAll(wP));
         return "login/index";
     }
 
@@ -52,7 +56,7 @@ public class HomeController {
         if(!pRepo.loginTest(person)){
             return "login/loginpage";
         }else {
-            loggedIn = person;
+            loggedIn = pRepo.fetchById(person.getRoom_id());
             return "redirect:/weekPage";
         }
     }
@@ -71,29 +75,22 @@ public class HomeController {
     @GetMapping("/weekPage")
     public String weekPage(Model model){
         model.addAttribute("wNumber", wRepo.fetchAll());
-        model.addAttribute("chosen", wRepo.fetchById(1));
-        model.addAttribute("person", pRepo.fetchById(loggedIn.getRoom_id()));
+        Weekplans wP = wRepo.fetchById(1);
+        model.addAttribute("chosen", wP);
+        model.addAttribute("person", pRepo.fetchAll(wP));
+        model.addAttribute("loggedIn", loggedIn);
         return "userVersion/weekPage";
     }
 
     @PostMapping("/weekPage")
     public String weekPage(Model model, @ModelAttribute Weekplans weekplans){
         model.addAttribute("wNumber", wRepo.fetchAll());
-        model.addAttribute("chosen", wRepo.fetchById(weekplans.getWeek_number()));
-        model.addAttribute("person", pRepo.fetchById(loggedIn.getRoom_id()));
+        Weekplans wP = wRepo.fetchById(weekplans.getWeek_number());
+        model.addAttribute("chosen", wP);
+        model.addAttribute("person", pRepo.fetchAll(wP));
+        model.addAttribute("loggedIn", loggedIn);
         return "userVersion/weekPage";
     }
-
-    /*
-    @PostMapping("/weekPage")
-    public String weekPage(Model model, @PathVariable("week_number") String week_number){
-        model.addAttribute("wNumber", wRepo.fetchAll());
-        int weekNumber = Integer.parseInt(week_number);
-        Weekplans chosenWeek = wRepo.fetchById(weekNumber);
-        model.addAttribute("chosen", chosenWeek);
-        return "userVersion/weekPage";
-    }
-    */
 
     @GetMapping("/viewDinner")
     public String viewDinner(Model model, @ModelAttribute Weekplans weekplans){
@@ -102,7 +99,6 @@ public class HomeController {
         String room_id = wRepo.fetchSpecificDayInfo(weekplans.getWeek_number(), weekplans.getDay());
         model.addAttribute("person", pRepo.fetchById(room_id));
         model.addAttribute("dinner", dRepo.fetchById(room_id, weekplans.getWeek_number(), weekplans.getDay()));
-        dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
         return "dinner/viewDinner";
     }
 
@@ -114,14 +110,12 @@ public class HomeController {
         List<Person> personList = sRepo.checkDays(weekplans.getWeek_number(), weekplans.getDay());
         model.addAttribute("registeredEaters", personList);
         model.addAttribute("dinner", dRepo.fetchById(room_id, weekplans.getWeek_number(), weekplans.getDay()));
-        dRepo.getChosenDate(weekplans.getWeek_number(), weekplans.getDay());
         return "userVersion/viewAllergies";
     }
 
     @GetMapping("/testPage")
     public String test_page(Model model){
         model.addAttribute("person", pRepo.fetchById("A15"));
-        //pRepo.date();
         return "userVersion/testPage";
     }
 
@@ -149,27 +143,6 @@ public class HomeController {
         model.addAttribute("dinner", dRepo.fetchById(loggedIn.getRoom_id(), weekplans.getWeek_number(), weekplans.getDay()));
         return "redirect:dinner/editDinner";
     }
-/*
-    @PostMapping("dinner/editDinner")
-    public String editDinner(@ModelAttribute Weekplans weekplans){
-        //dRepo.update();
-        return "dinner/editDinner";
-    }
-
- */
-
-    /*
-    @PostMapping("/createDinner")
-    public String createDinner(Model model, @ModelAttribute testObject testO){
-        dRepo.update(testO);
-        model.addAttribute("chosen", wRepo.fetchById(testO.getWeek_number()));
-        String room_id = wRepo.fetchSpecificDayInfo(testO.getWeek_number(), testO.getDay());
-        model.addAttribute("person", pRepo.fetchById(room_id));
-        model.addAttribute("dinner", dRepo.fetchById(room_id));
-        return "userVersion/createDinner";
-    }
-
-     */
 
     @GetMapping("/dinnerOption")
     public String dinnerOption(Model model, @ModelAttribute Weekplans weekplans){

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="MyCSS.css">
     <title>Dinner Club</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -33,7 +35,7 @@
         <tbody>
         <tr>
             <td >
-                <a th:text="${chosen.monday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+                <label th:text="${person[0]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
@@ -46,7 +48,7 @@
 
             </td>
             <td>
-                <a th:text="${chosen.tuesday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+                <label th:text="${person[1]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
@@ -59,7 +61,7 @@
 
             </td>
             <td>
-                <a th:text="${chosen.wednesday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+                <label th:text="${person[2]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
@@ -72,7 +74,7 @@
 
             </td>
             <td>
-                <a th:text="${chosen.thursday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+                <label th:text="${person[3]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
@@ -85,7 +87,7 @@
 
             </td>
             <td>
-                <a th:text="${chosen.friday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+                <label th:text="${person[4]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
@@ -98,7 +100,7 @@
 
             </td>
             <td>
-                <a th:text="${chosen.saturday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+                <label th:text="${person[5]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
@@ -111,7 +113,7 @@
 
             </td>
             <td>
-                <a th:text="${chosen.sunday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+                <label th:text="${person[6]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
                 <br>
 
@@ -139,6 +141,8 @@
         <button>Login</button>
     </a>
 
+
+    <!--
     <table id="table_upcoming">
         <tr>
         <thead>
@@ -165,6 +169,7 @@
             </tr>
         </tbody>
     </table>
+    -->
 
 </body>
 </html>

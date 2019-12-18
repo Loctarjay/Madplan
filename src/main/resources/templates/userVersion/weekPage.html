@@ -9,7 +9,7 @@
 <h1>Choose a day to see options</h1>
 <h2 th:text="@{'Week Number: '+${chosen.week_number}}"/>
 
-<label th:text="'Welcome: ' + ${person.first_name} + '.'"/>
+<label th:text="'Welcome: ' + ${loggedIn.first_name} + '.'"/>
 <br>
 <label>Select a day to cook or eat.</label>
 
@@ -37,7 +37,7 @@
     <tbody>
     <tr>
         <td >
-            <a th:text="${chosen.monday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${person[0]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
@@ -50,7 +50,7 @@
 
         </td>
         <td>
-            <a th:text="${chosen.tuesday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${person[1]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
@@ -63,7 +63,7 @@
 
         </td>
         <td>
-            <a th:text="${chosen.wednesday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${person[2]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
@@ -76,7 +76,7 @@
 
         </td>
         <td>
-            <a th:text="${chosen.thursday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${person[3]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
@@ -89,7 +89,7 @@
 
         </td>
         <td>
-            <a th:text="${chosen.friday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${person[4]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
@@ -102,7 +102,7 @@
 
         </td>
         <td>
-            <a th:text="${chosen.saturday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${person[5]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
@@ -115,7 +115,7 @@
 
         </td>
         <td>
-            <a th:text="${chosen.sunday}"/> <!--     Inde i a-tagget skal listens navn stå          -->
+            <a th:text="${person[6]}"/> <!--     Inde i a-tagget skal listens navn stå          -->
 
             <br>
 
